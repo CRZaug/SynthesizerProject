@@ -1,101 +1,70 @@
+"""
+The purpose of this class is to process data and create a file that may be written to wav
+
+__freq: the frequency of the first harmonic
+__amps: the amplitudes of the other harmonics (positive harmonics)
+__N: the number of harmonics
+
+"""
+
+
 import numpy as np
-#import SynthTry2 as snth
 
 class Process(): 
     
-    __file_to_write = None
-    __place_to_write = None
-    
-    
     def __init__(self, __freq,__amps,__N): # These are the default args, user passes to the new class
-
-
         self.process()
     
     def process(self,__freq,__amps,__N):    
         
-        print('ok')
-        print('freq',__freq)
-        print('amplitudes',__amps)
-        print('number of amplitudes',__N)
+     
+        __t = np.linspace(0,1,44100) # Sampling rate for audio
         
-        __t = np.linspace(0,1,44100)
-        
-        #amps = np.ones(5,dtype=complex)
         __randvals = np.random.rand(__N)*2*np.pi
         __amps = (np.cos(__randvals)+ 1j*np.sin(__randvals))*__amps
      
-        __scale = 88000/sum(np.abs(__amps))
-        
-        __asf = np.arange(1,6)*__freq
-        print(__asf)
-        
+        # All the positive frequencies in the spectrum
+        __asf = np.arange(1,__N+1)*__freq 
+
+        # The two sided amplitudes and frequencies 
         __amps2 = np.append(np.conj(np.flip(__amps,axis = 0)),__amps[:-1])
         __asf2 = np.append(-1*np.flip(__asf,axis = 0),__asf[:-1])
         
-        print(__asf2)
-        
+
+        # Create the signal thru a DFT
         __signal = 0
         for u in range(len(__amps2)):
-            __signal+= (300*len(__amps2))*(__amps2[u])*np.exp(2j*np.pi*__asf2[u]*__t) 
+            __signal+= (len(__amps2))*(__amps2[u])*np.exp(2j*np.pi*__asf2[u]*__t) 
         
         
         # The signal must be real to write the file
         __signal=np.real(__signal)
         
+        
+        # Make sure everything is scaled properly. The larget possible magnitude is 32768
+        # 24576 is 75% of that value
+        
+        #__rms_sig = np.sqrt(1/len(__signal)*sum(__signal**2))
+        
+        
+        __a = 24576/max(__signal) # this is the scale factor
+        __signal = __a*__signal # This is the new scaled signal
+        print(max(__signal))
+        
+        # Do this as a secondary check on scaling if desired if desired
+        # # Convert to decibels relative to full scale
+        # __signalDBFS = 20*np.log10(abs(__signal)/32768) # Because 32768 is the largest value for a signed 16bit int
+        # print('max DBFS', max(__signalDBFS)) # This value should be negative
+        
         # Generate the array that is necessary to write the file. Notice there are now 2 channels
         __newsound = np.zeros((len(__signal),2),dtype=int)
         for kj in range(len(__signal)):
             __newsound[kj]=[int(__signal[kj]),int(__signal[kj])]
-        # print(newsound[0:10])
-        
-        
+
     
         # Write and save the array! Needs to have the correct dtype
         __m = max(np.abs(__newsound[0]))
-        #__newsound = np.asarray(__newsound, dtype=np.int16)
+        __newsound = np.asarray(__newsound, dtype=np.int16) # This 16 bit int is where we got 32768 from
         
-        __newsound=(__newsound/__m).astype(np.float32)
+        return(__newsound,'TestsFolder2/temp.wav')
         
-        # self.file_to_write = __newsound
-        # 
-        # self.place_to_write = 'TestsFolder2/another5.wav'
-        
-        return(__newsound,'TestsFolder2/temp3.wav')
-        
-        # wavfile.write(dir, 44100, newsound) #44100 Hz is the sampling rate for audio files
-        # 
-        # 
-        # mixer.init()
-        # mixer.music.load(dir)
-        # mixer.music.play()
-        
-     
-#         
-#     def run_sth(self):
-#         print('playing the sound you generated')
-#         a = self.frequency_box.get()
-#         
-#         print(a)
-#         
-#         print(self._amps)
-#         
-#         # for i in range((self.amp_num()):
-#             
-#         
-#         while True:
-#             try:
-#                 f = float(a)
-#                 break
-#             except ValueError:
-#                 print("Oops!  That was not a valid number.  Try again...")
-#                 f=0
-#                 break
-#         print(f)
-#         self.playtone(f)
-#         return f
-#     
-# 
-# root = tk.Tk()
-# app = Application(master=root)
-# app.mainloop()
