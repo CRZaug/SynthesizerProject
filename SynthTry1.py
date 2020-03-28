@@ -26,7 +26,7 @@ class Application(tk.Frame):
         self.run["command"] = self.run_sth
         self.run.pack(side='bottom')
         
-        self.quit = tk.Button(self,text = 'quit',command = self.master.destroy)
+        self.quit = tk.Button(s)
         
         self.quit.pack(side='bottom')
         
