@@ -14,8 +14,6 @@ All python modules that this project depend on are:
 
 - matplotlib
 
-- wave
-
 - scipy
 
 - pygame
