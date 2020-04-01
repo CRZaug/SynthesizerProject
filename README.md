@@ -10,20 +10,20 @@ Second, the files GUI.py and Process.py work together to create the synthesizer.
 
 All python modules that this project depend on are:
 
-numpy
+- numpy
 
-matplotlib
+- matplotlib
 
-wave
+- wave
 
-scipy
+- scipy
 
-pygame
+- pygame
 
-tkinter
+- tkinter
 
 
 
-*Some notes:* There are a few instances where there are some bugs. Sometimes pressing run one time will create a strange sound, but pressing it again will play the expected sound. Playing frequencies that are sufficiently high (near the limits of human hearing) will result in a lower sound being played. I think these issues are caused by the way .wav files are written, but I am unsure. In fact, writing somewhat consistent .wav files was a major aspect of this project. So if I have time, I hope to continue working on these issues.
+_Some notes:_ There are a few instances where there are some bugs. Sometimes pressing run one time will create a strange sound, but pressing it again will play the expected sound. Playing frequencies that are sufficiently high (near the limits of human hearing) will result in a lower sound being played. I think these issues are caused by the way .wav files are written, but I am unsure. In fact, writing somewhat consistent .wav files was a major aspect of this project. So if I have time, I hope to continue working on these issues.
 
-Some personal reflections: I created this project as a way to kill time and also learn some things and create some cool things during the 2020 coronavirus lockdown. As a part of this process, I've taken my first steps in learning to design and create a GUI. As a happy accident, as it wasn't initially part of my plan, I've had the chance to learn some object oriented programming in Python. I've also had the excuse to try to use GitHub more effectively, a work in progress!
+_Some personal reflections:_ I created this project as a way to kill time and also learn some things and create some cool things during the 2020 coronavirus lockdown. As a part of this process, I've taken my first steps in learning to design and create a GUI. As a happy accident, as it wasn't initially part of my plan, I've had the chance to learn some object oriented programming in Python. I've also had the excuse to try to use GitHub more effectively, a work in progress!
