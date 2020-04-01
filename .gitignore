@@ -1,3 +1,5 @@
+# Files to ignore
+
 Example.py
 
 F2.wav
@@ -10,10 +12,12 @@ F5.wav
 
 Look_at_Sound.py
 
-Figures
+# Directories to ignore
 
-Originals
+Figures/
 
-TestsFolder
+Originals/
 
-__pycache__
+TestsFolder/
+
+__pycache__/
