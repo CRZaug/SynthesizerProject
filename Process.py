@@ -66,5 +66,5 @@ class Process():
         __m = max(np.abs(__newsound[0]))
         __newsound = np.asarray(__newsound, dtype=np.int16) # This 16 bit int is where we got 32768 from
         
-        return(__newsound,'TestsFolder2/temp.wav')
+        return(__newsound,'TempFolder/temp.wav')
         

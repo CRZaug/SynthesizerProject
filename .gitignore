@@ -1,6 +1,10 @@
 # Files to ignore
 
+.DS_Store
+
 Example.py
+
+GUI_notes.py
 
 F2.wav
 
